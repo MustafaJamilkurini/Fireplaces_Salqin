@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظمة تكافل - صرف قسائم التدفئة <span id="countdown-title"></span></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            direction: rtl; /* الاتجاه من اليمين إلى اليسار */
+        }
+
+        header {
+            background-color: #28a745; /* لون أخضر */
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 100px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .content {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .down-hand {
+            font-size: 300px;
+            color: #dc3545; /* لون الإيموجي الأحمر */
+            margin: 30px;
+            animation: pulse 1s infinite; /* تأثير النبض */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .voucher-info {
+            font-size: 30px;
+            font-weight: bold;
+            color: #333;
+            text-align: right; /* محاذاة النص إلى اليمين */
+            margin: 30px;
+        }
+
+        .highlight {
+            font-size: 50px; /* حجم الخط كبير */
+            font-weight: bold;
+            color: blue; /* لون أزرق */
+            animation: fade 1s infinite; /* تأثير الاختفاء */
+            margin: 30px;
+        }
+
+        @keyframes fade {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* تنسيق الألبوم الجانبي */
+        .sidebar {
+            width: 300px;
+            text-align: right;
+            margin-left: 20px; /* تعديل الهامش ليتناسب مع اتجاه الصفحة */
+        }
+
+        .sidebar img {
+            width: 200%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .sidebar h3 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #28a745;
+        }
+
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .closed-store {
+            color: #dc3545; /* لون أحمر */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="tk.png" alt="شعار منظمة تكافل" style="width: 1000px;"> <!-- شعار تكافل الشام -->
+        </div>
+        <h1>مدافئ وحمامات سلقين</h1>
+    </header>
+
+    <div class="content">
+        <div class="down-hand">👇</div>
+        <div>
+            <div class="voucher-info">هنا يتم صرف قسائم التدفئة المدعومة من منظمة تكافل</div>
+            <div class="highlight">مدافئ وحمامات سلقين</div>
+            <div style="font-size: 40px; color: red;">مصطفى جميل كوريني</div>
+        </div>
+        <div class="sidebar">
+            <h3>ألبوم المدافئ والمنتجات</h3>
+            <img id="productImage" src="b1.jpg" alt="مدفأة مازوت">
+            <p id="productInfo">مدفأة مازوت - النوع الأول</p>
+        </div>
+    </div>
+
+    <script>
+        // مصفوفة الصور والمعلومات
+        const products = [
+            { image: 'b1.jpg', info: 'مدفأة مازوت - النوع الأول' },
+            { image: 'b2.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b3.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b4.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b5.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b6.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b7.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b8.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b9.jpg', info: 'مدفأة حطب - النوع الثاني' },
+            { image: 'b10.jpg', info: 'مدفأة حطب - النوع الثاني' },
+           
+        ];
+
+        let currentIndex = 0;
+
+        function changeImage() {
+            const productImage = document.getElementById('productImage');
+            const productInfo = document.getElementById('productInfo');
+
+            productImage.src = products[currentIndex].image;
+            productInfo.innerText = products[currentIndex].info;
+
+            currentIndex = (currentIndex + 1) % products.length;
+        }
+
+        function calculateTimeRemaining() {
+            const now = new Date();
+            const closeTime = new Date();
+            closeTime.setHours(15, 0, 0);
+            const openTime = new Date();
+            openTime.setHours(8, 0, 0);
+
+            const timeDiff = closeTime - now;
+            const openDiff = now - openTime;
+
+            const storeStatus = document.getElementById('storeStatus');
+            if (now < openTime || now > closeTime) {
+                storeStatus.innerText = "المتجر مغلق";
+            } else {
+                storeStatus.innerText = "";
+                if (timeDiff > 0) {
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById('countdown-title').innerText = ` (${hours} ساعة و ${minutes} دقيقة)`;
+                } else {
+                    document.getElementById('countdown-title').innerText = " (السوق مغلق)";
+                }
+            }
+        }
+
+        setInterval(changeImage, 2000);
+        setInterval(calculateTimeRemaining, 60000);
+        calculateTimeRemaining();
+        changeImage();
+    </script>
+
+</body>
+</html>
