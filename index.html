@@ -3,187 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظمة تكافل - صرف قسائم التدفئة <span id="countdown-title"></span></title>
+    <title>شركة جميل كوريني للمدافئ</title>
     <style>
+        /* تصميم الأساس */
         body {
-            margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
             text-align: center;
-            direction: rtl; /* الاتجاه من اليمين إلى اليسار */
         }
 
         header {
-            background-color: #28a745; /* لون أخضر */
-            padding: 20px;
-            color: rgb(0, 0, 0);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    background-color: #075e5e; /* لون ثابت بدون شفافية */
+    padding: 0.2em; /* زيادة المساحة الداخلية قليلاً */
+    color: white;
+    max-width: 800px; /* تحديد أقصى عرض للرأس */
+    margin: 0 auto; /* توسيط الرأس */
+    border-radius: 15px; /* لجعل الزوايا مستديرة */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* إضافة ظل أكثر عمقًا */
+    background-image: linear-gradient(135deg, #075e5e, #0a7d7d); /* إضافة تدرج لوني جذاب */
+    text-align: center; /* توسيط النص داخل الرأس */
+}
+
+
+
+        nav ul {
+            list-style: none;
+            padding: 0;
         }
 
-        header h1 {
-            font-size: 100px;
-            margin: 0;
-            text-align: center;
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
         }
 
-        .content {
-            margin-top: 50px;
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* تصميم المحتوى الرئيسي */
+        .container {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            margin-top: 50px;
+            position: relative; /* لإضافة الأيقونة في موضع مناسب */
         }
 
-        .down-hand {
-            font-size: 300px;
-            color: #dc3545; /* لون الإيموجي الأحمر */
-            margin: 30px;
-            animation: pulse 1s infinite; /* تأثير النبض */
+        /* ألبوم عرض المنتجات */
+        .album {
+            width: 50%;
+            position: relative;
+            margin-top: -300px; /* هذه الخاصية سترفع الألبوم للأعلى */
         }
+
+        .album img {
+            width: 50%;
+            height: auto;
+            aspect-ratio: 1/1; /* إجبار الصور على أن تكون مربعة */
+            object-fit: cover; /* جعل الصور تتكيف مع المربع */
+            border-radius: 10px;
+            position: absolute;
+            top: 10;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .album img.active {
+            opacity: 1; /* الصورة الفعالة تظهر */
+        }
+
+        /* قسم القسائم */
+        .vouchers {
+            width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .vouchers p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .vouchers .logo {
+            margin-top: 20px;
+            width: 400px;
+            height: auto;
+        }
+
+        .vouchers h1 {
+            color: #333333;
+        }
+
+        /* تصميم الأزرار الإضافية */
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .buttons a {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons a:hover {
+            background-color: #555;
+        }
+
+        /* تصميم الأقسام المخفية */
+        .hidden {
+            display: none;
+        }
+
+        /* تصميم الأيقونة النابضة */
+        .pulse-icon {
+    width: 100px; /* حجم الأيقونة */
+    height: 100px; /* ارتفاع الأيقونة */
+    background-color: #e2e5e7; /* لون الأيقونة */
+    border-radius: 50%; /* شكل دائري */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto; /* توسيط الأيقونة */
+    animation: pulse 1.5s infinite; /* تأثير النبض */
+    position: relative; /* يسمح باستخدام خاصية top */
+    top: -500px; /* رفع الأيقونة لأعلى */
+}
+
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .voucher-info {
-            font-size: 30px;
-            font-weight: bold;
-            color: #333;
-            text-align: right; /* محاذاة النص إلى اليمين */
-            margin: 30px;
-        }
-
-        .highlight {
-            font-size: 50px; /* حجم الخط كبير */
-            font-weight: bold;
-            color: blue; /* لون أزرق */
-            animation: fade 1s infinite; /* تأثير الاختفاء */
-            margin: 30px;
-        }
-
-        @keyframes fade {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* تنسيق الألبوم الجانبي */
-        .sidebar {
-            width: 300px;
-            text-align: right;
-            margin-left: 20px; /* تعديل الهامش ليتناسب مع اتجاه الصفحة */
-        }
-
-        .sidebar img {
-            width: 200%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
-
-        .sidebar h3 {
-            font-size: 24px;
-            margin: 10px 0;
-            color: #28a745;
-        }
-
-        .timer {
-            font-size: 24px;
-            font-weight: bold;
-            color: #dc3545;
-        }
-
-        .closed-store {
-            color: #dc3545; /* لون أحمر */
-            font-weight: bold;
+            0% {
+                transform: scale(1); /* حجم الأيقونة الأصلي */
+            }
+            50% {
+                transform: scale(1.1); /* زيادة الحجم */
+            }
+            100% {
+                transform: scale(1); /* العودة للحجم الأصلي */
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <div>
-            <img src="tk.png" alt="شعار منظمة تكافل" style="width: 1000px;"> <!-- شعار تكافل الشام -->
-        </div>
-        <h1>مدافئ وحمامات سلقين</h1>
+        <nav>
+            <ul>
+                <h1><li><a href="#">شركة الحاج جميل كوريني   وأولاده</a></li></h1>
+                <h1><li><a href="#"> مدافئ وحمامات سلقين</a></li></h1>
+            </ul>
+        </nav>
     </header>
 
-    <div class="content">
-        <div class="down-hand">👇</div>
-        <div>
-            <div class="voucher-info">هنا يتم صرف قسائم التدفئة المدعومة من منظمة تكافل</div>
-            <div class="highlight">مدافئ وحمامات سلقين</div>
-            <div style="font-size: 40px; color: red;">مصطفى جميل كوريني</div>
-        </div>
-        <div class="sidebar">
-            <h3>ألبوم المدافئ والمنتجات</h3>
-            <img id="productImage" src="b1.jpg" alt="مدفأة مازوت">
-            <p id="productInfo">مدفأة مازوت - النوع الأول</p>
-        </div>
-    </div>
+    <main>
+        <div class="container">
+            <!-- ألبوم عرض المنتجات -->
+            <div class="album">
+                <img src="b1.jpg" alt="منتج 1" class="active" id="product-image-1">
+                <img src="b2.jpg" alt="منتج 2" id="product-image-2">
+                <img src="b3.jpg" alt="منتج 3" id="product-image-3">
+                <img src="b4.jpg" alt="منتج 3" id="product-image-3">
+                <img src="b5.jpg" alt="منتج 3" id="product-image-3">
+                <img src="b6.jpg" alt="منتج 3" id="product-image-3">
+                <img src="b7.jpg" alt="منتج 3" id="product-image-3">
+                <img src="b8.jpg" alt="منتج 3" id="product-image-3">
+            </div>
 
+            <!-- قسم القسائم -->
+            <div class="vouchers">
+                <p style="font-size: 3em;"></p><h1>🎉🥳جديدنا🎈🎊</h1></p>
+                <h1>متعاقدون مع منظمة تكافل الشام</h1>
+                <p style="font-size: 5em;">👇</p>
+                <p>هنا تصرف قسائم منظمة تكافل الشام للتدفئة</p>
+                <img src="tk.png" alt="شعار منظمة تكافل الشام" class="logo">
+            </div>
+        </div>
+
+        <!-- الأيقونة النابضة -->
+        <div class="pulse-icon" style="margin-top: 100px;">
+            <p style="font-size: 0.8em; color: #333;">سوريا</p>
+            <p style="font-size: 1.2em; color: #333;">إدلب سلقين</p>
+        </div>
+        <!-- الأزرار الإضافية -->
+        <div class="buttons">
+            <a href="#" onclick="showSection('about')">من نحن</a>
+            <a href="#" onclick="showSection('contact')">تواصل معنا</a>
+        </div>
+
+        <!-- قسم "من نحن" -->
+        <div id="about" class="hidden">
+            <h1>من نحن</h1>
+            <p>نحن شركة كوريني - تاريخ من التميز في عالم التدفئة
+
+                تأسست شركة كوريني عام 1960 تحت إشراف الجد مصطفى علي كوريني، ومنذ ذلك الحين، أصبحنا رواداً في مجال بيع المدافئ وتقديم خدمات الصيانة والتفصيل. نعتز بتقديم أفضل المنتجات والخدمات لعملائنا، ونفتخر بكوننا وكلاء معتمدين لأفضل الشركات في هذا المجال، مثل شركة مدافئ الشمس، بغدادي، شمس الدين شرف، النصر، الزعبي، والأصيل، منذ أكثر من 50 عامًا.
+                
+                خدماتنا المتنوعة
+                
+                نحن نقدم مجموعة واسعة من الخدمات المتعلقة بأجهزة التدفئة، بما في ذلك:
+                
+                بيع المدافئ: نعرض أحدث الموديلات من المدافئ التي تلبي جميع احتياجات عملائنا، سواء كانت منزلية أو تجارية.
+                
+                خدمات الصيانة والتفصيل: نضمن أن تبقى أجهزتكم في أفضل حالة، مع تقديم خدمات الصيانة لجميع أنواع أجهزة التدفئة القديمة والحديثة، بما في ذلك مازوت وحطب.
+                
+                تلبية احتياجات الشركات: نحن نعمل أيضاً مع شركات المطاعم والمؤسسات، حيث نقدم حلول تدفئة مثالية تناسب احتياجاتهم.
+                
+                موقعنا
+                
+                يقع مقر شركتنا في قلب سوريا، في إدلب - سلقين - سوق الأحذية المسقوف، جانب ساحة العين. تحت إشراف جميل مصطفى كوريني، نعمل على تلبية احتياجات المجتمع المحلي والداعم لتطويره من خلال توفير حلول تدفئة موثوقة ومتميزة.
+                
+                نحن نؤمن أن راحتكم هي أولويتنا، ونسعى جاهدين لتقديم خدمات تلبي توقعاتكم وتساهم في تحسين جودة حياتكم.
+                
+                </p>
+            <button onclick="hideSection('about')">إغلاق</button>
+        </div>
+
+        <!-- قسم "تواصل معنا" -->
+        <div id="contact" class="hidden">
+            <h1>تواصل معنا</h1>
+            <p>للتواصل معنا، يرجى مراسلتنا عبر البريد الإلكتروني: mustafakurini@gmail.com أو الاتصال بنا على الرقم: +352681552390.</p>
+            <button onclick="hideSection('contact')">إغلاق</button>
+        </div>
+    </main>
+
+    <!-- قسم الجافاسكريبت لتحريك الألبوم -->
     <script>
-        // مصفوفة الصور والمعلومات
-        const products = [
-            { image: 'b1.jpg', info: 'مدفأة مازوت - النوع الأول' },
-            { image: 'b2.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b3.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b4.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b5.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b6.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b7.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b8.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b9.jpg', info: 'مدفأة حطب - النوع الثاني' },
-            { image: 'b10.jpg', info: 'مدفأة حطب - النوع الثاني' },
-           
-        ];
-
+        const images = document.querySelectorAll('.album img');
         let currentIndex = 0;
 
         function changeImage() {
-            const productImage = document.getElementById('productImage');
-            const productInfo = document.getElementById('productInfo');
-
-            productImage.src = products[currentIndex].image;
-            productInfo.innerText = products[currentIndex].info;
-
-            currentIndex = (currentIndex + 1) % products.length;
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
         }
 
-        function calculateTimeRemaining() {
-            const now = new Date();
-            const closeTime = new Date();
-            closeTime.setHours(15, 0, 0);
-            const openTime = new Date();
-            openTime.setHours(8, 0, 0);
+        setInterval(changeImage, 2000); // تغيير الصورة كل 2 ثانية
 
-            const timeDiff = closeTime - now;
-            const openDiff = now - openTime;
-
-            const storeStatus = document.getElementById('storeStatus');
-            if (now < openTime || now > closeTime) {
-                storeStatus.innerText = "المتجر مغلق";
-            } else {
-                storeStatus.innerText = "";
-                if (timeDiff > 0) {
-                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    document.getElementById('countdown-title').innerText = ` (${hours} ساعة و ${minutes} دقيقة)`;
-                } else {
-                    document.getElementById('countdown-title').innerText = " (السوق مغلق)";
-                }
-            }
+        function showSection(section) {
+            document.getElementById(section).classList.remove('hidden');
         }
 
-        setInterval(changeImage, 2000);
-        setInterval(calculateTimeRemaining, 60000);
-        calculateTimeRemaining();
-        changeImage();
+        function hideSection(section) {
+            document.getElementById(section).classList.add('hidden');
+        }
     </script>
-
 </body>
 </html>
